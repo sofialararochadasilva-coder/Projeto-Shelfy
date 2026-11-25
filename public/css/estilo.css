@@ -1,26 +1,289 @@
-* { box-sizing: border-box; }
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    color: #222;
-    background: #f5f6f8;
+:root {
+    /* Cores Principais */
+    --shelfy-verde-floresta: #113026;      /* Fundo da barra lateral e card do castelo */
+    --shelfy-verde-medio: #1C4739;         /* Hover e detalhes internos no verde */
+    --shelfy-papel-creme: #F6F2E9;         /* Fundo geral da área de conteúdo */
+    --shelfy-papel-card: #FCFBF7;          /* Fundo dos cards brancos/creme claro */
+    
+    /* Cores de Destaque e Ação */
+    --shelfy-dourado: #C89D54;             /* Barras de progresso, estrelas e ícones */
+    --shelfy-dourado-claro: #E6CFA3;       /* Botão "Ver meu castelo" */
+    --shelfy-terracota: #C46243;           /* Badges (sequência de dias, notificações) */
+    
+    /* Textos e Bordas */
+    --shelfy-grafite: #1E2421;             /* Títulos e textos principais */
+    --shelfy-grafite-suave: #5C6661;       /* Subtítulos e legendas */
+    --shelfy-borda-suave: #E5DEC9;         /* Linhas divisórias e bordas de cards */
+
+    /* Tipografia e Medidas */
+    --fonte-titulo: 'Lora', Georgia, serif;
+    --fonte-corpo: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --largura-sidebar: 260px;
 }
 
-.topo {
+/* =========================================================
+   3. CONFIGURAÇÃO BASE DA PÁGINA
+   ========================================================= */
+body {
+    background-color: var(--shelfy-papel-creme);
+    color: var(--shelfy-grafite);
+    font-family: var(--fonte-corpo);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .titulo-serif {
+    font-family: var(--fonte-titulo);
+    color: var(--shelfy-grafite);
+    font-weight: 700;
+}
+/* =========================================================
+   4. ESTRUTURA GERAL E BARRA LATERAL (SIDEBAR)
+   ========================================================= */
+.shelfy-app-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.shelfy-sidebar {
+    width: var(--largura-sidebar);
+    background-color: var(--shelfy-verde-floresta);
+    color: #E8EFEA;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1040;
+    transition: transform 0.3s ease;
+}
+
+/* Logo Shelfy */
+.shelfy-sidebar-header {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.75rem 1.5rem;
-    background: #1f3864;
+    justify-content: space-between;
+    padding: 0 0.5rem 1.75rem 0.5rem;
 }
-.topo a { color: #fff; margin-right: 1rem; text-decoration: none; }
 
-main { max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+.shelfy-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: var(--shelfy-papel-creme);
+}
 
-label { display: block; margin-top: 1rem; }
-input { width: 100%; padding: 0.5rem; }
-button { margin-top: 1rem; padding: 0.5rem 1.25rem; }
+.shelfy-brand-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    color: var(--shelfy-dourado-claro);
+}
 
-.erro { color: #b00020; margin: 0.25rem 0 0; }
-.lista li { margin: 0.5rem 0; }
+.shelfy-brand-text {
+    font-family: var(--fonte-titulo);
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+/* Rótulo "SEU REINO" */
+.shelfy-nav-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: rgba(232, 239, 234, 0.45);
+    padding: 0 0.85rem;
+    margin-bottom: 0.65rem;
+}
+
+.shelfy-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.shelfy-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.72rem 0.95rem;
+    border-radius: 12px;
+    color: rgba(232, 239, 234, 0.82);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.shelfy-nav-link:hover {
+    background-color: var(--shelfy-verde-medio);
+    color: #FFFFFF;
+}
+
+/* Estado Ativo (Pílula Papel Creme com texto escuro) */
+.shelfy-nav-link.active {
+    background-color: var(--shelfy-papel-creme);
+    color: var(--shelfy-grafite);
+    font-weight: 600;
+}
+
+.shelfy-badge-terracota {
+    background-color: var(--shelfy-terracota);
+    color: #FFFFFF;
+    font-size: 0.72rem;
+    font-weight: 700;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+}
+
+/* Card de Citação Filosófica na Sidebar */
+.shelfy-quote-card {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1.1rem;
+}
+
+.shelfy-quote-icon {
+    color: var(--shelfy-dourado);
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.shelfy-quote-text {
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: #F2EFE9;
+    margin-bottom: 0.65rem;
+}
+
+.shelfy-quote-author {
+    font-size: 0.75rem;
+    color: rgba(232, 239, 234, 0.55);
+}
+
+/* Rodapé da Sidebar (Mini Perfil) */
+.shelfy-sidebar-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 0.85rem;
+    margin-top: 1rem;
+}
+
+.shelfy-user-mini {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #F2EFE9;
+    transition: background 0.2s ease;
+}
+
+.shelfy-user-mini:hover {
+    background-color: var(--shelfy-verde-medio);
+    color: #FFFFFF;
+}
+
+.shelfy-user-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--shelfy-dourado);
+}
+
+.shelfy-user-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+/* =========================================================
+   5. ÁREA PRINCIPAL E RESPONSIVIDADE MOBILE
+   ========================================================= */
+.shelfy-main-content {
+    flex: 1;
+    margin-left: var(--largura-sidebar);
+    padding: 2rem 2.5rem;
+    max-width: 100%;
+}
+
+.shelfy-mobile-header {
+    background-color: var(--shelfy-verde-floresta);
+    color: var(--shelfy-papel-creme);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+.shelfy-btn-menu-mobile {
+    color: var(--shelfy-papel-creme);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 0.25rem 0.55rem;
+}
+
+.shelfy-brand-mobile {
+    color: var(--shelfy-papel-creme);
+    text-decoration: none;
+    font-family: var(--fonte-titulo);
+    font-size: 1.3rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.shelfy-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 48, 38, 0.55);
+    z-index: 1035;
+}
+
+.shelfy-backdrop.show {
+    display: block;
+}
+
+@media (max-width: 991.98px) {
+    .shelfy-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .shelfy-sidebar.aberta {
+        transform: translateX(0);
+    }
+
+    .shelfy-main-content {
+        margin-left: 0;
+        padding: 1.25rem 1rem;
+    }
+}
